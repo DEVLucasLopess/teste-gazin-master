@@ -176,7 +176,6 @@ export const CadastroEdicaoNiveis: React.FC = () => {
         <FerramentasDeDetalhe
           textoBotaoNovo="Nova"
           mostrarBotaoApagar={id !== "nova"}
-          mostrarBotaoSalvarEFechar
           mostrarBotaoNovo={id !== "novo"}
           aoClicarSalvar={() => formRef.current?.submitForm()}
           aoClicarSalvarEFechar={() => formRef.current?.submitForm()}
