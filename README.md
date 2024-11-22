@@ -31,7 +31,7 @@ Excluir: Remover desenvolvedores ou níveis do sistema.
 2 - na pasta raiz principal onde fica os dois projetos:
 - docker compose up -d
 
-Ele estará executando na porta: http://localhost:3000/
+O servidor estará rodando na porta: http://localhost:3000/
 
 
 ## COMO RODAR O PROJETO LOCAL:
