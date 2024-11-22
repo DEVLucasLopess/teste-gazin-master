@@ -1,16 +1,5 @@
 import { openDb } from "../configDB.js";
 
-export async function createTableNivel() {
-  openDb().then((db) => {
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS Nivel (
-        id INTEGER PRIMARY KEY,
-        nome TEXT NOT NULL
-      )
-    `);
-  });
-}
-
 export async function selectNiveis(req, res) {
   const filter = req.query.nivel || "";
   const pagina = req.query.pagina || 1; 

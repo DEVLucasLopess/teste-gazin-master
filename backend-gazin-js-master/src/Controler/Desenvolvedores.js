@@ -1,23 +1,5 @@
 import { openDb } from "../configDB.js";
 
-// Query que usei pra criar a tabela!
-export async function createTable() {
-  openDb().then((db) => {
-    db.exec(`
-            CREATE TABLE IF NOT EXISTS Desenvolvedores (
-                id INTEGER PRIMARY KEY,
-                nome TEXT NOT NULL,
-                sexo TEXT NOT NULL,
-                data_nascimento TEXT NOT NULL,
-                idade INTEGER NOT NULL,
-                hobby TEXT NOT NULL,
-                nivel_id INTEGER,
-                FOREIGN KEY (nivel_id) REFERENCES Nivel(id)
-            )
-        `);
-  });
-}
-
 export async function selectDesenvolvedores(req, res) {
   const filter = req.query.nivel || "";
   const pagina = parseInt(req.query.pagina) || 1;
