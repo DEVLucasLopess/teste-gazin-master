@@ -65,6 +65,7 @@ const getById = async (id: number): Promise<IDetalhePessoas | Error> => {
 };
 
 const create = async ( dados: Omit<IDetalhePessoas, "id">): Promise<number | Error> => {
+  console.log("aaaaaaaaaaaaaaaaaaa", dados);
   try {
     const { data } = await Api.post(`/desenvolvedores`, dados);
     if (data) {
@@ -82,7 +83,6 @@ const updateById = async (
   dados: IDetalhePessoas
 ): Promise<void | Error> => {
   try {
-    console.log("dados>>>>>>>>>>>>>>>>>>>>>>>", dados);
     await Api.put(`/desenvolvedor/${id}`, dados);
   } catch (error) {
     console.error(error);

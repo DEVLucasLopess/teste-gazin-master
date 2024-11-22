@@ -112,12 +112,12 @@ export async function selectDesenvolvedor(req, res) {
         })
         .catch((err) => {
           console.error("Erro ao executar consulta:", err);
-          res.status(500).json({ error: "Erro ao buscar desenvolvedor" });
+          res.status(404).json({ error: "Erro ao buscar desenvolvedor" });
         });
     })
     .catch((err) => {
       console.error("Erro ao abrir banco de dados:", err);
-      res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+      res.status(404).json({ error: "Erro ao conectar ao banco de dados" });
     });
 }
 
@@ -135,17 +135,19 @@ export async function insertDesenvolvedor(req, res) {
         desenvolvedor.data_nascimento,
         desenvolvedor.idade,
         desenvolvedor.hobby,
-        desenvolvedor.nivelId,
+        desenvolvedor.nivel_id,
       ]
     );
   });
-  res.json({ statusCode: 200 });
+  res.json({ statusCode: 201 });
 }
 
 export async function updateDesenvolvedor(req, res) {
   let desenvolvedor = req.body;
-  openDb().then((db) => {
-    db.run(
+  console.log(desenvolvedor);
+  try {
+    const db = await openDb();
+    const result = await db.run(
       "UPDATE Desenvolvedores SET nome=?, sexo=?, data_nascimento=?, idade=?, hobby=?, nivel_id=? WHERE id=?",
       [
         desenvolvedor.nome,
@@ -157,11 +159,25 @@ export async function updateDesenvolvedor(req, res) {
         desenvolvedor.id,
       ]
     );
-  });
-  res.json({
-    statusCode: 200,
-    message: "Desenvolvedor atualizado com sucesso",
-  });
+
+    if (result.changes === 0) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: "Desenvolvedor não encontrado",
+      });
+    }
+
+    res.status(200).json({
+      statusCode: 200,
+      message: "Desenvolvedor atualizado com sucesso",
+    });
+  } catch (error) {
+    res.status(404).json({
+      statusCode: 404,
+      message: "Erro ao atualizar desenvolvedor",
+      error: error.message,
+    });
+  }
 }
 
 export async function deleteDesenvolvedor(req, res) {
@@ -171,7 +187,7 @@ export async function deleteDesenvolvedor(req, res) {
       if (err) {
         console.error("Erro ao deletar o desenvolvedor:", err);
         return res
-          .status(500)
+          .status(404)
           .json({ error: "Erro ao deletar o desenvolvedor" });
       }
       res.json({

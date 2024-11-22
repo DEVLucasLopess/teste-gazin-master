@@ -225,7 +225,7 @@ export const CadastroEdicaoNiveis: React.FC = () => {
                   <VTextField
                     fullWidth
                     name="nome"
-                    label="Digite seu nome completo"
+                    label="Digite o nivel"
                     disabled={isLoading}
                     onChange={(e) => setNome(e.target.value)}
                   />

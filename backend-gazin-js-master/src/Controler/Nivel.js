@@ -57,6 +57,7 @@ export async function selectNivel(req, res) {
       res.json(nivel)
     );
   });
+  res.json({ statusCode: 200 });
 }
 
 export async function insertNivel(req, res) {
@@ -64,7 +65,7 @@ export async function insertNivel(req, res) {
   openDb().then((db) => {
     db.run("INSERT INTO Nivel (nome) VALUES (?)", [nivel.nome]);
   });
-  res.json({ statusCode: 200 });
+  res.json({ statusCode: 201 });
 }
 
 export async function updateNivel(req, res) {
