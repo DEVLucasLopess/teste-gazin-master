@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+  back-end-gazin:
+    image: back-end-gazin:latest
+    ports:
+      - "3080:3080"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 512M
+    networks:
+      - app-network
+
+  front-end-gazin:
+    image: front-end-gazin:latest
+    ports:
+      - "3000:3000"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 512M
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
