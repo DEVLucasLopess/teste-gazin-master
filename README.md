@@ -5,7 +5,7 @@
 - na pasta raiz no frontend rodar: docker build -t front-end-gazin .
 
 2 - para subir os containers
-na pasta raiz principal ondefica os dois projetos: docker compose up -d
+na pasta raiz principal onde fica os dois projetos: docker compose up -d
 
 
 ## COMO RODAR O PROJETO LOCAL:

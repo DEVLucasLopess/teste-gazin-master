@@ -16,8 +16,8 @@ interface IHandleSalvar {
 const formValidationSchema: yup.Schema<IHandleSalvar> = yup.object().shape({
   nome: yup
     .string()
-    .required('O campo "Nome" é obrigatório!')
-    .min(3, 'O campo "Nome" deve ter no mínimo 3 caracteres!'),
+    .required('O campo "Nivel" é obrigatório!')
+    .min(3, 'O campo "Nivel" deve ter no mínimo 3 caracteres!'),
 });
 
 export const CadastroEdicaoNiveis: React.FC = () => {
