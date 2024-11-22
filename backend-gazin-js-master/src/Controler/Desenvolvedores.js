@@ -20,66 +20,79 @@ export async function createTable() {
 
 export async function selectDesenvolvedores(req, res) {
   const filter = req.query.nivel || "";
-  const pagina = req.query.pagina || 1;
-  const limite = req.query.limite || 10;
+  const pagina = parseInt(req.query.pagina) || 1;
+  const limite = parseInt(req.query.limite) || 10;
   const offset = (pagina - 1) * limite;
-  let data = [];
-  let qtd = '';
 
-  if (filter) {
-    data = await openDb().then((db) =>
-      db.all(
-      `SELECT 
-      d.id, 
-      d.nome, 
-      d.sexo, 
-      d.data_nascimento, 
-      d.idade, 
-      d.hobby, 
-      n.id AS nivel_id, 
-      n.nome AS nivel
-    FROM Desenvolvedores d
-    LEFT JOIN Nivel n ON d.nivel_id = n.id
-    WHERE d.nome LIKE ? LIMIT ? OFFSET ?`, [`%${filter}%`, limite, offset]));
+  try {
+    const db = await openDb();
 
-    qtd = await openDb().then((db) =>
-      db.get("SELECT COUNT(*) as qtd FROM Desenvolvedores WHERE nome LIKE ?", [
-        filter,
-      ])
-    );
-  } else {
-    data = await openDb().then((db) =>
-      db.all(
-      `SELECT 
-      d.id, 
-      d.nome, 
-      d.sexo, 
-      d.data_nascimento, 
-      d.idade, 
-      d.hobby, 
-      n.id AS nivel_id, 
-      n.nome AS nivel
-      FROM Desenvolvedores d
-      LEFT JOIN Nivel n ON d.nivel_id = n.id
-      LIMIT ? OFFSET ?
-  `,
+    let data = [];
+    let qtd;
+
+    if (filter) {
+      data = await db.all(
+        `
+        SELECT 
+          d.id, 
+          d.nome, 
+          d.sexo, 
+          d.data_nascimento, 
+          d.idade, 
+          d.hobby, 
+          n.id AS nivel_id, 
+          n.nome AS nivel
+        FROM Desenvolvedores d
+        LEFT JOIN Nivel n ON d.nivel_id = n.id
+        WHERE d.nome LIKE ? 
+        LIMIT ? OFFSET ?
+        `,
+        [`%${filter}%`, limite, offset]
+      );
+
+      qtd = await db.get(
+        "SELECT COUNT(*) as qtd FROM Desenvolvedores WHERE nome LIKE ?",
+        [`%${filter}%`]
+      );
+    } else {
+      data = await db.all(
+        `
+        SELECT 
+          d.id, 
+          d.nome, 
+          d.sexo, 
+          d.data_nascimento, 
+          d.idade, 
+          d.hobby, 
+          n.id AS nivel_id, 
+          n.nome AS nivel
+        FROM Desenvolvedores d
+        LEFT JOIN Nivel n ON d.nivel_id = n.id
+        LIMIT ? OFFSET ?
+        `,
         [limite, offset]
-      )
-    );
+      );
 
-    qtd = await openDb().then((db) =>
-      db.get("SELECT COUNT(*) as qtd FROM Desenvolvedores")
-    );
+      qtd = await db.get("SELECT COUNT(*) as qtd FROM Desenvolvedores");
+    }
+
+    const total = qtd.qtd;
+
+    res.status(200).json({
+      pagina,
+      limite,
+      total,
+      statusCode: 200,
+      paginas: Math.ceil(total / limite),
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      statusCode: 404,
+      message: "Erro ao buscar desenvolvedores",
+      error: error.message,
+    });
   }
-  const total = qtd.qtd;
-  res.json({
-    pagina,
-    limite,
-    total,
-    statusCode: 200,
-    paginas: Math.ceil(total / limite),
-    data,
-  });
 }
 
 export async function selectDesenvolvedor(req, res) {
@@ -123,12 +136,13 @@ export async function selectDesenvolvedor(req, res) {
 
 export async function insertDesenvolvedor(req, res) {
   let desenvolvedor = req.body;
-  openDb().then((db) => {
-    db.run(
+  try {
+    const db = await openDb();
+    const result = await db.run(
       `
-            INSERT INTO Desenvolvedores (nome, sexo, data_nascimento, idade, hobby, nivel_id) 
-            VALUES (?, ?, ?, ?, ?, ?)
-        `,
+      INSERT INTO Desenvolvedores (nome, sexo, data_nascimento, idade, hobby, nivel_id) 
+      VALUES (?, ?, ?, ?, ?, ?)
+      `,
       [
         desenvolvedor.nome,
         desenvolvedor.sexo,
@@ -138,13 +152,30 @@ export async function insertDesenvolvedor(req, res) {
         desenvolvedor.nivel_id,
       ]
     );
-  });
-  res.json({ statusCode: 201 });
+
+    if (result.changes > 0) {
+      res.status(201).json({
+        statusCode: 201,
+        message: "Desenvolvedor inserido com sucesso",
+      });
+    } else {
+      res.status(400).json({
+        statusCode: 404,
+        message: "Falha ao inserir desenvolvedor",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      statusCode: 404,
+      message: "Erro ao inserir desenvolvedor",
+      error: error.message,
+    });
+  }
 }
+
 
 export async function updateDesenvolvedor(req, res) {
   let desenvolvedor = req.body;
-  console.log(desenvolvedor);
   try {
     const db = await openDb();
     const result = await db.run(

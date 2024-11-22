@@ -57,30 +57,88 @@ export async function selectNivel(req, res) {
       res.json(nivel)
     );
   });
-  res.json({ statusCode: 200 });
 }
 
 export async function insertNivel(req, res) {
-  let nivel = req.body;
-  openDb().then((db) => {
-    db.run("INSERT INTO Nivel (nome) VALUES (?)", [nivel.nome]);
-  });
-  res.json({ statusCode: 201 });
+  const { nome } = req.body;
+
+  try {
+    const db = await openDb();
+    const result = await db.run("INSERT INTO Nivel (nome) VALUES (?)", [nome]);
+
+    if (result.changes > 0) {
+      res.status(201).json({
+        statusCode: 201,
+        message: "Nível inserido com sucesso",
+        id: result.lastID,
+      });
+    } else {
+      res.status(400).json({
+        statusCode: 404,
+        message: "Falha ao inserir nível",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      statusCode: 404,
+      message: "Erro ao inserir nível",
+      error: error.message,
+    });
+  }
 }
+
 
 export async function updateNivel(req, res) {
   const { id } = req.params;
   const { nome } = req.body;
-  openDb().then((db) => {
-    db.run("UPDATE Nivel SET nome = ? WHERE id = ?", [nome, id]);
-  });
-  res.json({ statusCode: 200 });
+
+  try {
+    const db = await openDb();
+    const result = await db.run("UPDATE Nivel SET nome = ? WHERE id = ?", [nome, id]);
+    if (result.changes > 0) {
+      res.status(200).json({
+        statusCode: 200,
+        message: "Nível atualizado com sucesso",
+      });
+    } else {
+      res.status(404).json({
+        statusCode: 404,
+        message: "Nível não encontrado",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      statusCode: 500,
+      message: "Erro ao atualizar nível",
+      error: error.message,
+    });
+  }
 }
 
 export async function deleteNivel(req, res) {
   let id = req.params.id;
-  openDb().then((db) => {
-    db.run("DELETE FROM Nivel WHERE id=?", [id]);
-  });
-  res.json({ statusCode: 200 });
+
+  try {
+    const db = await openDb();
+    const result = await db.run("DELETE FROM Nivel WHERE id=?", [id]);
+
+    if (result.changes > 0) {
+      res.status(200).json({
+        statusCode: 200,
+        message: "Nível deletado com sucesso",
+      });
+    } else {
+      res.status(404).json({
+        statusCode: 404,
+        message: "Nível não encontrado",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      statusCode: 500,
+      message: "Erro ao deletar nível",
+      error: error.message,
+    });
+  }
 }
+
