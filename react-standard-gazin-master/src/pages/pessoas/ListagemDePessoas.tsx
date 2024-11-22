@@ -23,6 +23,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { Environment } from "../../shared/environment";
+import { format } from "date-fns";
 
 export const ListagemDePessoas: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -145,7 +146,7 @@ export const ListagemDePessoas: React.FC = () => {
                 </TableCell>
                 <TableCell>{row.nome}</TableCell>
                 <TableCell>{row.sexo === 'M' ? 'MASCULINO' : 'FEMININO'}</TableCell>
-                <TableCell>{row.data_nascimento}</TableCell>
+                <TableCell>{format(new Date(row.data_nascimento), 'dd/MM/yyyy')}</TableCell>
                 <TableCell>{row.idade} anos</TableCell>
                 <TableCell>{row.hobby}</TableCell>
                 <TableCell>{row.nivel}</TableCell>

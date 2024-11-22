@@ -68,7 +68,6 @@ export const CadastroEdicaoPessoas: React.FC = () => {
         hobby: "",
         idade: "",
         sexo: "",
-
       });
     }
   }, [id]);
@@ -272,7 +271,8 @@ export const CadastroEdicaoPessoas: React.FC = () => {
                   <VTextField
                     fullWidth
                     name="data_nascimento"
-                    placeholder="Data Nascimento"
+                    label="Data Nascimento"
+                    type="date"
                     disabled={isLoading}
                   />
                 </Grid>
