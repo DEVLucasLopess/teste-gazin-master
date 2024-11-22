@@ -13,8 +13,9 @@ na pasta raiz principal ondefica os dois projetos: docker compose up -d
 1 - Entre na pasta e rode:
 npm install
 
-2 - para subir os containers
-npm run prod
+2 - para subir as aplicações:
+no bakcend: npm run prod
+no frontend: npm run dev
 
 OBS: caso dê o error (sh: 1: nodemon: Permission denied) quando você tentar rodar o backend localmente executa o comando:
 npm install -g nodemon
