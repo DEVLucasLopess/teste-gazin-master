@@ -63,8 +63,12 @@ export const CadastroEdicaoPessoas: React.FC = () => {
     } else {
       formRef.current?.setData({
         nome: "",
-        email: "",
         cidadeId: "",
+        data_nascimento: "",
+        hobby: "",
+        idade: "",
+        sexo: "",
+
       });
     }
   }, [id]);
@@ -269,7 +273,6 @@ export const CadastroEdicaoPessoas: React.FC = () => {
                   <VTextField
                     fullWidth
                     name="data_nascimento"
-                    type="date"
                     placeholder="Data Nascimento"
                     disabled={isLoading}
                   />

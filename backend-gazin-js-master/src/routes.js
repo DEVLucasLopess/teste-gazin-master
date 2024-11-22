@@ -12,13 +12,14 @@ router.get('/', (req, res)=>{
 })
 
 router.get('/desenvolvedores', selectDesenvolvedores);
+
 router.get('/desenvolvedor/:id', selectDesenvolvedor);
-router.put('/desenvolvedores/:id', updateDesenvolvedor);
-router.post('/desenvolvedores', insertDesenvolvedor);
+router.put('/desenvolvedor/:id', updateDesenvolvedor);
 router.delete('/desenvolvedores/:id', deleteDesenvolvedor);
 
-router.post('/nivel', insertNivel);
+router.post('/desenvolvedores', insertDesenvolvedor);
 
+router.post('/nivel', insertNivel);
 router.get('/niveis', selectNiveis);
 
 router.get('/nivel/:id', selectNivel);

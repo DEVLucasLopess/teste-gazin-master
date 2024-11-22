@@ -53,7 +53,7 @@ const getAll = async (
 
 const getById = async (id: number): Promise<IDetalhePessoas | Error> => {
   try {
-    const { data } = await Api.get(`/desenvolvedores/${id}`);
+    const { data } = await Api.get(`/desenvolvedor/${id}`);
     if (data) {
       return data;
     }
@@ -82,7 +82,7 @@ const updateById = async (
   dados: IDetalhePessoas
 ): Promise<void | Error> => {
   try {
-    await Api.put(`/desenvolvedores/${id}`, dados);
+    await Api.put(`/desenvolvedor/${id}`, dados);
   } catch (error) {
     console.error(error);
     return new Error(

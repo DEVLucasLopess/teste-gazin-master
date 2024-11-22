@@ -1,7 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FerramentasDaListagem } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
-import { format } from 'date-fns';
 import Swal from 'sweetalert2'
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -146,7 +145,7 @@ export const ListagemDePessoas: React.FC = () => {
                 </TableCell>
                 <TableCell>{row.nome}</TableCell>
                 <TableCell>{row.sexo === 'M' ? 'MASCULINO' : 'FEMININO'}</TableCell>
-                {/* <TableCell>{row.data_nascimento ? format(new Date(row.data_nascimento), 'dd/MM/yyyy') : 'Data inválida'}</TableCell> */}
+                <TableCell>{row.data_nascimento}</TableCell>
                 <TableCell>{row.idade} anos</TableCell>
                 <TableCell>{row.hobby}</TableCell>
                 <TableCell>{row.nivel}</TableCell>
