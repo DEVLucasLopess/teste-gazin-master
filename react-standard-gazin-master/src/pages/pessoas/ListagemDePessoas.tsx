@@ -145,7 +145,7 @@ export const ListagemDePessoas: React.FC = () => {
                   </IconButton>
                 </TableCell>
                 <TableCell>{row.nome}</TableCell>
-                <TableCell>{row.sexo === 'M' ? 'MASCULINO' : 'FEMININO'}</TableCell>
+                <TableCell>{row.sexo}</TableCell>
                 <TableCell>{format(new Date(row.data_nascimento), 'dd/MM/yyyy')}</TableCell>
                 <TableCell>{row.idade} anos</TableCell>
                 <TableCell>{row.hobby}</TableCell>
