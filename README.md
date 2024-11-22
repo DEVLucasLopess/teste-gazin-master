@@ -1,3 +1,27 @@
+## Descrição
+Olá, pessoal!
+Este projeto implementa um CRUD (Create, Read, Update, Delete) para gerenciar desenvolvedores e seus respectivos níveis. Com ele, é possível:
+- Vincular níveis aos desenvolvedores.
+- Realizar operações de criação, leitura, atualização e exclusão tanto para desenvolvedores quanto para níveis.
+
+Funcionalidades
+Criar: Adicionar novos desenvolvedores e níveis.
+Ler: Consultar informações sobre desenvolvedores e níveis.
+Atualizar: Modificar os dados de desenvolvedores e níveis, incluindo a vinculação entre eles.
+Excluir: Remover desenvolvedores ou níveis do sistema.
+
+## Tecnologias frontend
+- Typescript;
+- vite | React;
+- Meterial-ui;
+- useForm
+- yup
+
+## Tecnologias frontend
+- Node.js
+- express
+- sqlite
+
 ## COMO RODAR O PROJETO COM O DOCKER:
 
 1 - gerar a imagem docker do backend e frontend:
@@ -10,7 +34,12 @@ na pasta raiz principal onde fica os dois projetos: docker compose up -d
 
 ## COMO RODAR O PROJETO LOCAL:
 
-1 - Entre na pasta e rode:
+1 - Entre na pasta do backend e rode:
+npm install
+npm install sqlite3 (Banco de dados)
+npm install sqlite (Banco de dados)
+
+2 - Entre na pasta do frontend e rode:
 npm install
 
 2 - para subir as aplicações:
