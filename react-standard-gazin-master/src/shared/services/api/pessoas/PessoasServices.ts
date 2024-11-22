@@ -3,7 +3,7 @@ import { Api } from "../axios-config";
 
 export interface IListagemDePessoas {
   id: number;
-  nivelId: number;
+  nivel_id: number;
   nome: string;
   sexo: string;
   data_nascimento: string;
@@ -14,7 +14,7 @@ export interface IListagemDePessoas {
 
 export interface IDetalhePessoas {
   id: number;
-  nivelId: number;
+  nivel_id: number;
   nome: string;
 }
 
@@ -82,6 +82,7 @@ const updateById = async (
   dados: IDetalhePessoas
 ): Promise<void | Error> => {
   try {
+    console.log("dados>>>>>>>>>>>>>>>>>>>>>>>", dados);
     await Api.put(`/desenvolvedor/${id}`, dados);
   } catch (error) {
     console.error(error);

@@ -12,11 +12,11 @@ import { AutoCompleteNiveis } from "./AutoCompleteNiveis";
 
 interface IHandleSalvar {
   nome: string;
-  nivelId: number;
+  nivel_id: number;
 }
 
 const formValidationSchema: yup.Schema<IHandleSalvar> = yup.object().shape({
-  nivelId: yup
+  nivel_id: yup
     .number()
     .typeError("")
     .required("Este campo é obrigatorio e deve ser um valor númerico!"),
