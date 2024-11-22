@@ -17,7 +17,7 @@ Excluir: Remover desenvolvedores ou níveis do sistema.
 - useForm
 - yup
 
-## Tecnologias frontend
+## Tecnologias backend
 - Node.js
 - express
 - sqlite
