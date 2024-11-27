@@ -24,12 +24,11 @@ Excluir: Remover desenvolvedores ou níveis do sistema.
 
 ## COMO RODAR O PROJETO COM O DOCKER:
 
-1 - Para gerar as imagens docker do backend e frontend na pasta raiz do projeto, execute os seguintes comandos:
-- docker build -t back-end-gazin ./backend-gazin-js-master/
-- docker build -t front-end-gazin ./react-standard-gazin-master/
+1 - Para gerar e subir as imagens docker dos projetos, dentro da pasta "teste-gazin-master" executa os seguintes comandos:
 
-2 - na pasta raiz principal onde fica os dois projetos:
-- docker compose up -d
+* docker build -t back-end-gazin ./backend-gazin-js-master/
+* docker build -t front-end-gazin ./react-standard-gazin-master/
+* docker compose up -d
 
 O servidor estará rodando na porta: http://localhost:3000/
 
