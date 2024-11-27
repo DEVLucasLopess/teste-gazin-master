@@ -33,19 +33,23 @@ Excluir: Remover desenvolvedores ou níveis do sistema.
 
 O servidor estará rodando na porta: http://localhost:3000/
 
-
 ## COMO RODAR O PROJETO LOCAL:
 
 1 - Entre na pasta do backend e rode:
-npm install
-npm install sqlite3 (Banco de dados)
-npm install sqlite (Banco de dados)
+
+- npm install
+
+- npm install sqlite3 (Banco de dados)
+
+- npm install sqlite (Banco de dados)
 
 2 - Entre na pasta do frontend e rode:
-npm install
+- npm install
 
 2 - para subir as aplicações:
+
 no bakcend: npm run prod
+
 no frontend: npm run dev
 
 OBS: caso dê o error (sh: 1: nodemon: Permission denied) quando você tentar rodar o backend localmente executa o comando:
