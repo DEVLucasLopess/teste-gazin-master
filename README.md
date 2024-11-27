@@ -30,6 +30,8 @@ Excluir: Remover desenvolvedores ou níveis do sistema.
 * docker build -t front-end-gazin ./react-standard-gazin-master/
 * docker compose up -d
 
+
+caso nescessário, use o comando "sudo".
 O servidor estará rodando na porta: http://localhost:3000/
 
 ## COMO RODAR O PROJETO LOCAL:
